@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -49,6 +51,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String numberCode = '';
+  String text = '';
+  bool isLoading = false;
 
   void _incrementCounter() {
     setState(() {
@@ -58,6 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+    });
+  }
+
+  void setText(String code) {
+    setState(() {
+      isLoading = true;
+      numberCode = code;
+      text = 'This is the Level $code Course';
+    });
+    Timer tempTimer = Timer(const Duration(seconds: 1), () {});
+    tempTimer = Timer(const Duration(seconds: 1), () {
+      setState(() {
+        isLoading = false;
+      });
+      tempTimer.cancel();
     });
   }
 
@@ -75,35 +95,91 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  height: 1080,
+                  width: 1080,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/generic_map.png')
+                    ),
+                  ),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 100, // Specify the top position
+                        left: 150, // Specify the left position
+                        child: FilledButton(onPressed: () {
+                          setText('1');
+                        },
+                        child: const Text('Level 1')), // Replace with your custom widget
+                      ),
+                      Positioned(
+                        top: 100, // Specify the top position
+                        left: 930, // Specify the left position
+                        child: FilledButton(onPressed: () {
+                          setText('2');
+                        },
+                        child: const Text('Level 2')), // Replace with your custom widget
+                      ),
+                      Positioned(
+                        top: 930, // Specify the top position
+                        left: 150, // Specify the left position
+                        child: FilledButton(onPressed: () {
+                          setText('3');
+                        },
+                        child: const Text('Level 3')), // Replace with your custom widget
+                      ),
+                      Positioned(
+                        top: 930, // Specify the top position
+                        left: 930, // Specify the left position
+                        child: FilledButton(onPressed: () {
+                          setText('4');
+                        },
+                        child: const Text('Level 4')), // Replace with your custom widget
+                      ),
+                    ],
+                  )
+                )
+              )
+            )
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          text,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                          )
+                        ),
+                        const SizedBox(height: 12),
+                        Text('For the this area, the Level $numberCode Course has this Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nisl nunc, commodo quis facilisis feugiat, varius at justo. Maecenas interdum id orci vitae egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque commodo mauris vitae nisl auctor, non ornare velit maximus. Ut non leo condimentum, tincidunt dui sit amet, tristique justo. Integer ultricies nisl massa, eu lacinia orci consectetur in. Quisque eget molestie nunc. Pellentesque quis massa ullamcorper massa ullamcorper pulvinar et quis enim. Maecenas ex leo, laoreet in tristique a, varius at leo. Vestibulum purus magna, egestas et auctor consequat, mattis non ante. Suspendisse potenti. Nulla maximus nec ipsum laoreet finibus. Fusce pellentesque, dui eget porttitor vulputate, velit arcu accumsan urna, nec gravida nunc lacus in nulla.')
+                      ],
+                    )
+                  ),
+                ),
+                if(isLoading)
+                const Center(child: CircularProgressIndicator())
+              ],
+            )
+          )
+        ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
