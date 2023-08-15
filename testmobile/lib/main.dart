@@ -103,50 +103,55 @@ class _MyHomePageState extends State<MyHomePage> {
               scrollDirection: Axis.vertical,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Container(
-                  height: 1080,
-                  width: 1080,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/generic_map.png')
+                child: InteractiveViewer(
+                  boundaryMargin: EdgeInsets.all(20.0), // Margin around the widget
+                  minScale: 0.5, // Minimum scale factor
+                  maxScale: 3.0, // Maximum scale factor
+                  child: Container(
+                    height: 1080,
+                    width: 1080,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/generic_map.png')
+                      ),
                     ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 100, // Specify the top position
+                          left: 150, // Specify the left position
+                          child: FilledButton(onPressed: () {
+                            setText('1');
+                          },
+                          child: const Text('Level 1')), // Replace with your custom widget
+                        ),
+                        Positioned(
+                          top: 100, // Specify the top position
+                          left: 930, // Specify the left position
+                          child: FilledButton(onPressed: () {
+                            setText('2');
+                          },
+                          child: const Text('Level 2')), // Replace with your custom widget
+                        ),
+                        Positioned(
+                          top: 930, // Specify the top position
+                          left: 150, // Specify the left position
+                          child: FilledButton(onPressed: () {
+                            setText('3');
+                          },
+                          child: const Text('Level 3')), // Replace with your custom widget
+                        ),
+                        Positioned(
+                          top: 930, // Specify the top position
+                          left: 930, // Specify the left position
+                          child: FilledButton(onPressed: () {
+                            setText('4');
+                          },
+                          child: const Text('Level 4')), // Replace with your custom widget
+                        ),
+                      ],
+                    )
                   ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 100, // Specify the top position
-                        left: 150, // Specify the left position
-                        child: FilledButton(onPressed: () {
-                          setText('1');
-                        },
-                        child: const Text('Level 1')), // Replace with your custom widget
-                      ),
-                      Positioned(
-                        top: 100, // Specify the top position
-                        left: 930, // Specify the left position
-                        child: FilledButton(onPressed: () {
-                          setText('2');
-                        },
-                        child: const Text('Level 2')), // Replace with your custom widget
-                      ),
-                      Positioned(
-                        top: 930, // Specify the top position
-                        left: 150, // Specify the left position
-                        child: FilledButton(onPressed: () {
-                          setText('3');
-                        },
-                        child: const Text('Level 3')), // Replace with your custom widget
-                      ),
-                      Positioned(
-                        top: 930, // Specify the top position
-                        left: 930, // Specify the left position
-                        child: FilledButton(onPressed: () {
-                          setText('4');
-                        },
-                        child: const Text('Level 4')), // Replace with your custom widget
-                      ),
-                    ],
-                  )
                 )
               )
             )
