@@ -33,7 +33,7 @@ class MyCarousel extends StatelessWidget {
             });
           },
           child: AspectRatio(
-            aspectRatio: 3 / 2,
+            aspectRatio: 9 / 1,
             child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
               child: Container(
                 decoration: BoxDecoration(

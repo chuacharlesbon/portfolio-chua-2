@@ -89,10 +89,7 @@ class _MyDrawerScreenState extends State<MyDrawer> {
   }
 
   List<Widget> getMenuItems({required Size size}) {
-    if(size.width < 768){
-      return [];
-    }else{
-      return MyAppBarMenu.appBarMenu.map(
+    return MyAppBarMenu.appBarMenu.map(
         (item) {
           bool isHovered = false;
           return StatefulBuilder(
@@ -134,6 +131,5 @@ class _MyDrawerScreenState extends State<MyDrawer> {
           }
         );}
       ).toList();
-    }
   }
 }
