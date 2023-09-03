@@ -72,7 +72,7 @@ class _MyHomeSectionState extends State<MyHomeSection> {
           VerticalSpacers.fromSize(24),
           Row(
             children: [
-              if(size.width > 1440)
+              if(size.width > 1920)
               Container(
                 color: Colors.black.withOpacity(0.05),
                 width: 240,
@@ -89,7 +89,7 @@ class _MyHomeSectionState extends State<MyHomeSection> {
                   child: const Center(child: Text('Home'))
                 )
               ),
-              if(size.width > 1440)
+              if(size.width > 1920)
               Container(
                 color: Colors.black.withOpacity(0.05),
                 width: 240,
