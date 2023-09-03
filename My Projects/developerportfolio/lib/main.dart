@@ -1,9 +1,29 @@
 import 'package:developerportfolio/components/app_title_builder.dart';
 import 'package:developerportfolio/pages/my_home.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
+  final serviceLocator = GetIt.instance;
+  serviceLocator.registerLazySingleton<GoRouter>(
+    () => GoRouter(
+      initialLocation: '/',
+      routes: [
+        GoRoute(
+          path: '/',
+          name: 'home',
+          pageBuilder: (context, state) => const MaterialPage(
+            child: AppTitleBuilder(
+              title: "Developer's Portfolio | Home",
+              child: MyHomeScreen()
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+  
   runApp(const MyApp());
 }
 
@@ -72,9 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    final serviceLocator = GetIt.instance;
+
     return MaterialApp.router(
       title: "Developer's Portfolio | Charles Chua",
-      routerConfig: _router,
+      routerConfig: serviceLocator<GoRouter>(), //_router,
     );
   }
 

@@ -1,3 +1,5 @@
+import 'package:developerportfolio/components/my_appbar.dart';
+import 'package:developerportfolio/components/my_drawer.dart';
 import 'package:developerportfolio/helpers/change_favicon.dart';
 import 'package:flutter/material.dart';
 
@@ -23,10 +25,10 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
-      appBar: null,
-      drawer: null,
+      appBar: MyAppBar(size: size),
+      drawer: null, //MyDrawer(size: size),
+      endDrawer: MyDrawer(size: size),
       body: const Text('Home'),
       bottomNavigationBar: null,
     );
