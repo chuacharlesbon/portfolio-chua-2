@@ -45,8 +45,8 @@ class MyCarousel extends StatelessWidget {
                     fit: BoxFit.cover
                   ) */
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: items[index],
+                child: Image.network(
+                  items[index],
                   fit: BoxFit.fill,
                 ),
               )
